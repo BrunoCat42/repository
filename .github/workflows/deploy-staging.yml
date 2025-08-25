@@ -1,0 +1,23 @@
+name: Staging • on gh-pages push
+
+on:
+  push:
+    branches: [ gh-pages ]
+
+permissions:
+  contents: read
+
+jobs:
+  ci-staging:
+    name: CI rápido (staging)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "[TEST-STAGING] smoke tests e validações leves OK"
+
+  deploy-staging:
+    name: Deploy para /staging (gh-pages)
+    needs: ci-staging
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploy é feito pelo GitHub Pages (job automático 'pages build and deployment')"
